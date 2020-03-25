@@ -19,4 +19,8 @@ public class Locker {
     public boolean include(Bag bag) {
         return this.container.containsValue(bag);
     }
+
+    public void takeBag(Ticket ticket) {
+        container.remove(ticket);
+    }
 }
