@@ -66,8 +66,8 @@ public class LockerTest {
         Bag bag = new Bag();
         Ticket ticket = locker.receive(bag);
         locker.takeBag(ticket);
-        locker.takeBag(ticket);
-        assertThat()
+        Bag errorBag = locker.takeBag(ticket);
+        assertThat(errorBag).isNull();
     }
 
 
