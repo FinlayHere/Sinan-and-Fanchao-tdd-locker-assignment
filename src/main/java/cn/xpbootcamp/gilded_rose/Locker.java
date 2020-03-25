@@ -44,7 +44,10 @@ public class Locker {
         return this.container.containsValue(bag);
     }
 
-    public void takeBag(Ticket ticket) {
-        container.remove(ticket);
+    public Bag takeBag(Ticket ticket) {
+        Bag bag = this.container.get(ticket);
+        this.container.remove(ticket);
+        return bag;
     }
+
 }

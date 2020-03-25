@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LockerTest {
@@ -59,8 +60,15 @@ public class LockerTest {
 
     }
 
-//    @Test
-//    public void should_locker_
+    @Test
+    public void should_ticket_cannot_use_when_user_take_their_bag_away(){
+        Locker locker = new Locker();
+        Bag bag = new Bag();
+        Ticket ticket = locker.receive(bag);
+        locker.takeBag(ticket);
+        locker.takeBag(ticket);
+        assertThat()
+    }
 
 
 
