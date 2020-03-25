@@ -19,6 +19,16 @@ public class LockerTest {
     }
 
     @Test
+    public void should_not_store_bag_when_store_bag_and_no_more_capacity_given_capacity_and_bag(){
+        int capacity = 5;
+        Locker locker = new Locker(capacity);
+        for (int i = 0;i < 10;i++){
+            locker.receive(new Bag());
+        }
+        assertThat(locker.getContainer().size()).isEqualTo(5);
+    }
+
+    @Test
     public void should_bag_in_locker_when_after_store_bag_given_bag(){
         Locker locker = new Locker();
         Bag bag = new Bag();
@@ -38,6 +48,7 @@ public class LockerTest {
         assertThat(tickets.size()).isEqualTo(100);
     }
 
+
     @Test
     public void should_locker_no_longer_contain_bag_when_user_take_their_bag_away_given_ticket(){
         Locker locker = new Locker();
@@ -47,6 +58,9 @@ public class LockerTest {
         assertThat(locker.include(bag)).isEqualTo(false);
 
     }
+
+//    @Test
+//    public void should_locker_
 
 
 
