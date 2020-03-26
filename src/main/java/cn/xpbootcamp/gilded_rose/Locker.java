@@ -13,7 +13,7 @@ public class Locker {
         this.capacity = capacity;
     }
 
-    private Map<Ticket,Bag> container = new HashMap<Ticket,Bag>();
+    private Map<Ticket,Parcel> container = new HashMap<Ticket,Parcel>();
 
     public int getCapacity() {
         return capacity;
@@ -23,31 +23,31 @@ public class Locker {
         this.capacity = capacity;
     }
 
-    public Map<Ticket, Bag> getContainer() {
+    public Map<Ticket, Parcel> getContainer() {
         return container;
     }
 
-    public void setContainer(Map<Ticket, Bag> container) {
+    public void setContainer(Map<Ticket, Parcel> container) {
         this.container = container;
     }
 
-    public Ticket receive(Bag bag) {
+    public Ticket receive(Parcel parcel) {
         if (this.container.size() < capacity) {
             Ticket ticket = new Ticket();
-            this.container.put(ticket,bag);
+            this.container.put(ticket,parcel);
             return ticket;
         }
         return null;
     }
 
-    public boolean include(Bag bag) {
-        return this.container.containsValue(bag);
+    public boolean include(Parcel parcel) {
+        return this.container.containsValue(parcel);
     }
 
-    public Bag takeBag(Ticket ticket) {
-        Bag bag = this.container.get(ticket);
+    public Parcel takeParcel(Ticket ticket) {
+        Parcel parcel = this.container.get(ticket);
         this.container.remove(ticket);
-        return bag;
+        return parcel;
     }
 
 }
