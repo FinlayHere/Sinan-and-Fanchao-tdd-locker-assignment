@@ -90,7 +90,14 @@ public class LockerTest {
         assertThat(parcel.getId()).isEqualTo(certainParcel.getId());
     }
 
-
-
-
+    @Test
+    public void should_invalidate_when_use_ticket_take_parcel_when_effective_ticket() {
+        // Given effective ticket
+        Locker locker = new Locker(1);
+        Ticket ticket = locker.receive(new Parcel());
+        // When take parcel
+        locker.takeParcel(ticket);
+        // Then ticket should be invalidated
+        assertThat(ticket.getId()).isNull();
+    }
 }
