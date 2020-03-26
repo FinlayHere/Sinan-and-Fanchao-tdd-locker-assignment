@@ -21,7 +21,7 @@ public class LockerTest {
      */
     @Test
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_20() {
-        // Given 容量是20的locker 当前可用容量是20
+        // Given 容量是20的locker 当前可用容量是20 和一个待存入的包裹
         Locker locker = new Locker(20);
         // When save parcel
         Ticket ticket = locker.receive(new Parcel());
@@ -31,7 +31,7 @@ public class LockerTest {
 
     @Test
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_10() {
-        // Given 容量是20的locker 当前可用容量是10
+        // Given 容量是20的locker 当前可用容量是10 和一个待存入的包裹
         Locker locker = new Locker(20);
         for (int i = 0;i < 9; i++) {
             locker.receive(new Parcel());
@@ -44,7 +44,7 @@ public class LockerTest {
 
     @Test
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_1() {
-        // Given 容量是20的locker 当前可用容量是10
+        // Given 容量是20的locker 当前可用容量是1 和一个待存入的包裹
         Locker locker = new Locker(20);
         for (int i = 0;i < 19; i++) {
             locker.receive(new Parcel());
@@ -53,6 +53,18 @@ public class LockerTest {
         Ticket ticket = locker.receive(new Parcel());
         // then return a ticket
         assertThat(ticket).isInstanceOf(Ticket.class);
+    }
+
+    @Test(expected = LockerFullException.class)
+    public void should_throw_Error_when_deposit_parcel_given_locker_max_capacity_20_available_0() {
+        // Given 容量是20的locker 当前可用容量为0
+        Locker locker = new Locker(20);
+        for (int i = 0; i < 20; i++) {
+            locker.receive(new Parcel());
+        }
+        Parcel parcel = new Parcel();
+        // when save parcel
+        locker.receive(parcel);
     }
 
 }
