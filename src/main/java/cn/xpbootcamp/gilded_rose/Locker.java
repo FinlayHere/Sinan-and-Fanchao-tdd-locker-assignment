@@ -45,10 +45,13 @@ public class Locker {
     }
 
     public Parcel takeParcel(Ticket ticket) {
-        Parcel parcel = this.container.get(ticket);
-        this.container.remove(ticket);
-        ticket.setId(null);
-        return parcel;
+        if (ticket.getId() != null){
+            Parcel parcel = this.container.get(ticket);
+            this.container.remove(ticket);
+            ticket.setId(null);
+            return parcel;
+        }
+        throw new InvalidatedTicketException("Invalidated ticket");
     }
 
     public void initUsedCapacity(int numberOfInitUsedCapacity) {
