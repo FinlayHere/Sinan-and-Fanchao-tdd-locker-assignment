@@ -1,5 +1,10 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidatedTicketException;
+import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+import cn.xpbootcamp.gilded_rose.model.Locker;
+import cn.xpbootcamp.gilded_rose.model.Parcel;
+import cn.xpbootcamp.gilded_rose.model.Ticket;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
