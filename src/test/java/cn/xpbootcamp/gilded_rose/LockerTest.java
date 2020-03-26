@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LockerTest {
@@ -55,7 +56,7 @@ public class LockerTest {
         assertThat(ticket).isInstanceOf(Ticket.class);
     }
 
-    @Test(expected = LockerFullException.class)
+    @Test()
     public void should_throw_Error_when_deposit_parcel_given_locker_max_capacity_20_available_0() {
         // Given 容量是20的locker 当前可用容量为0
         Locker locker = new Locker(20);
@@ -63,8 +64,10 @@ public class LockerTest {
             locker.receive(new Parcel());
         }
         Parcel parcel = new Parcel();
-        // when save parcel
-        locker.receive(parcel);
+        // when save parcel then throw Exception
+        assertThrows(LockerFullException.class,
+                ()->locker.receive(parcel),
+                "Locker full cannot save parcel anymore");
     }
 
 }
