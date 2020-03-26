@@ -91,7 +91,7 @@ public class LockerTest {
     }
 
     @Test
-    public void should_invalidate_when_use_ticket_take_parcel_when_effective_ticket() {
+    public void should_invalidate_ticket_when_use_ticket_take_parcel_when_effective_ticket() {
         // Given effective ticket
         Locker locker = new Locker(1);
         Ticket ticket = locker.receive(new Parcel());
@@ -99,5 +99,18 @@ public class LockerTest {
         locker.takeParcel(ticket);
         // Then ticket should be invalidated
         assertThat(ticket.getId()).isNull();
+    }
+
+    @Test
+    public void should_throw_InvalidatedTicketException_when_take_parcel_given_invalidated_ticket() {
+        // Given invalidated ticket
+        Locker locker = new Locker();
+        Ticket ticket = locker.receive(new Parcel());
+        locker.takeParcel(ticket);
+        // When use invalidated ticket
+        // Then throw InvalidatedTicketException
+        assertThrows(InvalidatedTicketException.class,
+                ()->locker.takeParcel(ticket),
+                "Invalidated ticket");
     }
 }
