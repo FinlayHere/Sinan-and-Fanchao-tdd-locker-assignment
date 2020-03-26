@@ -66,19 +66,6 @@ public class LockerTest {
     }
 
     @Test
-    public void should_have_unique_id_for_each_ticket_when_store_parcel_given_10000_parcels_and_locker_capacity_unlimited() {
-        // Given 10000 parcels and unlimited capacity parcel
-        Locker locker = new Locker();
-        Set<String> ticketIdSet = new HashSet<String>();
-        // when store 10000 parcels
-        for (int i = 0;i < 10000;i++){
-            ticketIdSet.add(new Ticket().getId());
-        }
-        // then each id should be different
-        assertThat(ticketIdSet.size()).isEqualTo(10000);
-    }
-
-    @Test
     public void should_return_parcel_which_map_by_ticket_when_use_ticket_take_parcel_when_effective_ticket_and_certain_parcel() {
         // Given certain parcel and effective ticket
         Locker locker = new Locker();
