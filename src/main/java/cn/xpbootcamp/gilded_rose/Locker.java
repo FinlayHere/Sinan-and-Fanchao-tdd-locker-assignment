@@ -50,8 +50,8 @@ public class Locker {
         return parcel;
     }
 
-    public void initCapacity(int numberOfInitCapacity) {
-        for (int i = 0;i < numberOfInitCapacity; i++){
+    public void initUsedCapacity(int numberOfInitUsedCapacity) {
+        for (int i = 0;i < numberOfInitUsedCapacity; i++){
             this.receive(new Parcel());
         }
     }

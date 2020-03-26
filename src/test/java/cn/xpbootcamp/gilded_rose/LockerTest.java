@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,7 +35,7 @@ public class LockerTest {
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_10() {
         // Given 容量是20的locker 当前可用容量是10 和一个待存入的包裹
         Locker locker = new Locker(20);
-        locker.initCapacity(10);
+        locker.initUsedCapacity(10);
         // when save bag
         Ticket ticket = locker.receive(new Parcel());
         // then return a ticket
@@ -45,7 +46,7 @@ public class LockerTest {
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_1() {
         // Given 容量是20的locker 当前可用容量是1 和一个待存入的包裹
         Locker locker = new Locker(20);
-        locker.initCapacity(19);
+        locker.initUsedCapacity(19);
         // when save bag
         Ticket ticket = locker.receive(new Parcel());
         // then return a ticket
@@ -56,12 +57,24 @@ public class LockerTest {
     public void should_throw_Error_when_deposit_parcel_given_locker_max_capacity_20_available_0() {
         // Given 容量是20的locker 当前可用容量为0
         Locker locker = new Locker(20);
-        locker.initCapacity(20);
+        locker.initUsedCapacity(20);
         Parcel parcel = new Parcel();
         // when save parcel then throw Exception
         assertThrows(LockerFullException.class,
                 ()->locker.receive(parcel),
                 "Locker full cannot save parcel anymore");
     }
+
+    @Test()
+    public void should_have_unique_id_for_each_ticket_when_store_parcel_given_10000_parcels_and_locker_capacity_unlimited() {
+        // Given 10000 parcels and unlimited capacity parcel
+        Locker locker = new Locker();
+        Set<String> ticketIdSet = new HashSet<String>();
+        for (int i = 0;i < 10000;i++){
+            ticketIdSet.add(new Ticket().getId());
+        }
+        assertThat(ticketIdSet.size()).isEqualTo(10000);
+    }
+
 
 }
