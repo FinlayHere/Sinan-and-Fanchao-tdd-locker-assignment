@@ -2,14 +2,8 @@ package cn.xpbootcamp.gilded_rose;
 
 import org.junit.jupiter.api.Test;
 
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.locks.Lock;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LockerTest {
     /*
@@ -80,12 +74,12 @@ public class LockerTest {
     @Test
     public void should_invalidate_ticket_when_use_ticket_take_parcel_when_effective_ticket() {
         // Given effective ticket
-        Locker locker = new Locker(1);
+        Locker locker = new Locker();
         Ticket ticket = locker.receive(new Parcel());
         // When take parcel
         locker.takeParcel(ticket);
         // Then ticket should be invalidated
-        assertThat(ticket.getId()).isNull();
+        assertThat(locker.getContainer().containsKey(ticket.getId())).isFalse();
     }
 
     @Test

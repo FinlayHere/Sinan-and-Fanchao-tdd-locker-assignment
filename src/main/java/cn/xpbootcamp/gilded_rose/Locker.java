@@ -7,6 +7,10 @@ public class Locker {
     private int capacity;
     private Map<String,Parcel> container = new HashMap<>();
 
+    public Map<String, Parcel> getContainer() {
+        return container;
+    }
+
     public Locker() {
         this.capacity = Integer.MAX_VALUE;
     }
