@@ -37,7 +37,7 @@ public class Locker {
             this.container.put(ticket,parcel);
             return ticket;
         }
-        return null;
+        throw new LockerFullException("Locker full cannot save parcel anymore");
     }
 
     public boolean include(Parcel parcel) {
@@ -50,4 +50,9 @@ public class Locker {
         return parcel;
     }
 
+    public void initCapacity(int numberOfInitCapacity) {
+        for (int i = 0;i < numberOfInitCapacity; i++){
+            this.receive(new Parcel());
+        }
+    }
 }
