@@ -47,6 +47,7 @@ public class Locker {
     public Parcel takeParcel(Ticket ticket) {
         Parcel parcel = this.container.get(ticket);
         this.container.remove(ticket);
+        ticket.setId(null);
         return parcel;
     }
 
