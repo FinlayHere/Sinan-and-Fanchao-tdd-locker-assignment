@@ -53,7 +53,7 @@ public class LockerTest {
         assertThat(ticket).isInstanceOf(Ticket.class);
     }
 
-    @Test()
+    @Test
     public void should_throw_Error_when_deposit_parcel_given_locker_max_capacity_20_available_0() {
         // Given 容量是20的locker 当前可用容量为0
         Locker locker = new Locker(20);
@@ -65,16 +65,32 @@ public class LockerTest {
                 "Locker full cannot save parcel anymore");
     }
 
-    @Test()
+    @Test
     public void should_have_unique_id_for_each_ticket_when_store_parcel_given_10000_parcels_and_locker_capacity_unlimited() {
         // Given 10000 parcels and unlimited capacity parcel
         Locker locker = new Locker();
         Set<String> ticketIdSet = new HashSet<String>();
+        // when store 10000 parcels
         for (int i = 0;i < 10000;i++){
             ticketIdSet.add(new Ticket().getId());
         }
+        // then each id should be different
         assertThat(ticketIdSet.size()).isEqualTo(10000);
     }
+
+    @Test
+    public void should_return_parcel_which_map_by_ticket_when_use_ticket_take_parcel_when_effective_ticket_and_certain_parcel() {
+        // Given certain parcel and effective ticket
+        Locker locker = new Locker();
+        Parcel certainParcel = new Parcel("certainId");
+        Ticket ticket = locker.receive(certainParcel);
+        // when take away parcel
+        Parcel parcel = locker.takeParcel(ticket);
+        // then parcel should equal certain parcel
+        assertThat(parcel.getId()).isEqualTo(certainParcel.getId());
+    }
+
+
 
 
 }
