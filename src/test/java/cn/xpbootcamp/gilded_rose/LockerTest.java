@@ -20,9 +20,14 @@ public class LockerTest {
 
     ### ----取包裹----
     - Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 得到同一个包裹
-    - Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 ticket失效
     - Given 一个包裹 和它对应的 ticket，when 使用同一张 ticket 取两次包裹，then 取包失败 抛出异常 无效票据
      */
+
+    public void initUsed(Locker locker, int capacity) {
+        for(int i = 0; i < capacity; i++){
+            locker.receive(new Parcel());
+        }
+    }
 
     // Given locker 最大容量 20，已经使用的容量为 0，when 存包裹，then 寄存成功 返回ticket
     @Test
@@ -40,7 +45,7 @@ public class LockerTest {
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_10() {
         // Given 容量是20的locker 当前可用容量是10 和一个待存入的包裹
         Locker locker = new Locker(20);
-        locker.initUsedCapacity(10);
+        this.initUsed(locker, 10);
         // when save bag
         Ticket ticket = locker.receive(new Parcel());
         // then return a ticket
@@ -52,7 +57,7 @@ public class LockerTest {
     public void should_return_ticket_when_deposit_parcel_given_locker_max_capacity_20_available_capacity_1() {
         // Given 容量是20的locker 当前可用容量是1 和一个待存入的包裹
         Locker locker = new Locker(20);
-        locker.initUsedCapacity(19);
+        this.initUsed(locker, 19);
         // when save bag
         Ticket ticket = locker.receive(new Parcel());
         // then return a ticket
@@ -64,7 +69,7 @@ public class LockerTest {
     public void should_throw_Error_when_deposit_parcel_given_locker_max_capacity_20_available_0() {
         // Given 容量是20的locker 当前可用容量为0
         Locker locker = new Locker(20);
-        locker.initUsedCapacity(20);
+        this.initUsed(locker, 20);
         Parcel parcel = new Parcel();
         // when save parcel then throw Exception
         assertThrows(LockerFullException.class,
@@ -83,18 +88,6 @@ public class LockerTest {
         Parcel parcel = locker.takeParcel(ticket);
         // then parcel should equal certain parcel
         assertThat(parcel.getId()).isEqualTo(certainParcel.getId());
-    }
-
-    // Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 ticket失效
-    @Test
-    public void should_invalidate_ticket_when_use_ticket_take_parcel_when_effective_ticket() {
-        // Given effective ticket
-        Locker locker = new Locker();
-        Ticket ticket = locker.receive(new Parcel());
-        // When take parcel
-        locker.takeParcel(ticket);
-        // Then ticket should be invalidated
-        assertThat(locker.getContainer().containsKey(ticket.getId())).isFalse();
     }
 
     // Given 一个包裹 和它对应的 ticket，when 使用同一张 ticket 取两次包裹，then 取包失败 抛出异常 无效票据

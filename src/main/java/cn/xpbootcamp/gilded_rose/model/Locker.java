@@ -10,10 +10,6 @@ public class Locker {
     private int capacity;
     private Map<String,Parcel> container = new HashMap<>();
 
-    public Map<String, Parcel> getContainer() {
-        return container;
-    }
-
     public Locker() {
         this.capacity = Integer.MAX_VALUE;
     }
@@ -38,11 +34,5 @@ public class Locker {
             return this.container.remove(ticket.getId());
         }
         throw new InvalidatedTicketException("Invalidated ticket");
-    }
-
-    public void initUsedCapacity(int numberOfInitUsedCapacity) {
-        for (int i = 0;i < numberOfInitUsedCapacity; i++){
-            this.receive(new Parcel());
-        }
     }
 }
