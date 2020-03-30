@@ -9,7 +9,6 @@
 
 ### ----取包裹----
 - Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 得到同一个包裹 
-- Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 ticket失效
 - Given 一个包裹 和它对应的 ticket，when 使用同一张 ticket 取两次包裹，then 取包失败 抛出异常 无效票据
 
 
