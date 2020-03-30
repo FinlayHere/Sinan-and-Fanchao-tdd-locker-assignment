@@ -30,7 +30,6 @@ public class Locker {
 
     public Parcel takeParcel(Ticket ticket) {
         if (container.containsKey(ticket.getId())){
-            Parcel parcel = this.container.get(ticket.getId());
             return this.container.remove(ticket.getId());
         }
         throw new InvalidatedTicketException("Invalidated ticket");
