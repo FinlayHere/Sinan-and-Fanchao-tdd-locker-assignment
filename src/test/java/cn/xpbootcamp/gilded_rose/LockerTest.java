@@ -11,20 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LockerTest {
-    /*
-    ### ----存包裹----
-    - Given locker 最大容量 20，已经使用的容量为 0，when 存包裹，then 寄存成功 返回ticket
-    - Given locker 最大容量 20，已经使用的容量为 10，when 存包裹，then 寄存成功 返回ticket
-    - Given locker 最大容量 20，已经使用的容量为 19，when 存包裹，then 寄存成功 返回ticket
-    - Given locker 最大容量 20，已经使用的容量为 20，when 存包裹，then 寄存失败 返回异常locker已经满了
-
-    ### ----取包裹----
-    - Given 一个包裹 和它对应的 ticket，when 使用ticket 取包裹，then 取包裹成功 得到同一个包裹
-    - Given 一个包裹 和它对应的 ticket，when 使用同一张 ticket 取两次包裹，then 取包失败 抛出异常 无效票据
-     */
-
     public void initUsed(Locker locker, int capacity) {
-        for(int i = 0; i < capacity; i++){
+        for (int i = 0; i < capacity; i++) {
             locker.receive(new Parcel());
         }
     }
@@ -73,7 +61,7 @@ public class LockerTest {
         Parcel parcel = new Parcel();
         // when save parcel then throw Exception
         assertThrows(LockerFullException.class,
-                ()->locker.receive(parcel),
+                () -> locker.receive(parcel),
                 "Locker full cannot save parcel anymore");
     }
 
@@ -82,7 +70,7 @@ public class LockerTest {
     public void should_return_parcel_which_map_by_ticket_when_use_ticket_take_parcel_when_effective_ticket_and_certain_parcel() {
         // Given certain parcel and effective ticket
         Locker locker = new Locker();
-        Parcel certainParcel = new Parcel("certainId");
+        Parcel certainParcel = new Parcel();
         Ticket ticket = locker.receive(certainParcel);
         // when take away parcel
         Parcel parcel = locker.takeParcel(ticket);
@@ -100,7 +88,7 @@ public class LockerTest {
         // When use invalidated ticket
         // Then throw InvalidatedTicketException
         assertThrows(InvalidatedTicketException.class,
-                ()->locker.takeParcel(ticket),
+                () -> locker.takeParcel(ticket),
                 "Invalidated ticket");
     }
 }

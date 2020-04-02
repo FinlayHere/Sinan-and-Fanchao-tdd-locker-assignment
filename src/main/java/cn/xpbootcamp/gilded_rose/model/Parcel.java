@@ -6,11 +6,7 @@ public class Parcel{
     private String id;
 
     public Parcel() {
-        this.id = UUID.randomUUID().toString().replace("-","");
-    }
-
-    public Parcel(String id) {
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {
