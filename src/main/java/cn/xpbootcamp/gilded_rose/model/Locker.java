@@ -1,7 +1,6 @@
 package cn.xpbootcamp.gilded_rose.model;
 
 import cn.xpbootcamp.gilded_rose.exception.InvalidatedTicketException;
-import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
 
 import java.util.HashMap;
 import java.util.Map;
