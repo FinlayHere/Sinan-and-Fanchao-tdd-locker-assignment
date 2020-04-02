@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidatedTicketException;
 import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import cn.xpbootcamp.gilded_rose.model.LockerManageRobot;
@@ -67,7 +68,7 @@ public class RobotTest {
     }
 
     /**
-     * 取且成功
+     * take parcel successfully
      * Given ticket(valid), locker and robot, when take parcel, then return parcel
      */
     @Test
@@ -86,4 +87,28 @@ public class RobotTest {
         assertThat(lockerManageRobot.receive(firstTicket)).isEqualTo(firstParcel);
         assertThat(lockerManageRobot.receive(secondTicket)).isEqualTo(secondParcel);
     }
+
+    /**
+     * take parcel fail
+     * Given ticket(invalided), two lockers and robot, when take parcel, then take fail throw exception
+     */
+    @Test
+    public void should_throw_InvaildTicketException_when_take_parcel_given_invalid_ticket() {
+        // Given
+        ArrayList<Locker> managedLockers = new ArrayList<>();
+        managedLockers.add(new Locker(1));
+        managedLockers.add(new Locker(1));
+        LockerManageRobot lockerManageRobot = new LockerManageRobot(managedLockers);
+        Parcel firstParcel = new Parcel();
+        Parcel secondParcel = new Parcel();
+
+        Ticket firstTicket = lockerManageRobot.recieve(firstParcel);
+        Ticket secondTicket = lockerManageRobot.recieve(secondParcel);
+        lockerManageRobot.receive(firstTicket);
+        lockerManageRobot.receive(secondTicket);
+        // When and Then
+        assertThrows(InvalidatedTicketException.class, () -> lockerManageRobot.receive(firstTicket));
+        assertThrows(InvalidatedTicketException.class, () -> lockerManageRobot.receive(secondTicket));
+    }
+
 }
