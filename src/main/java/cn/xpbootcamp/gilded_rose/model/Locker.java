@@ -19,8 +19,17 @@ public class Locker {
     }
 
     public Ticket receive(Parcel parcel) {
-        if (this.container.size() < capacity) {
+        if (this.isAvailable()) {
             Ticket ticket = new Ticket();
+            this.container.put(ticket.getId(),parcel);
+            return ticket;
+        }
+        throw new LockerFullException("Locker full cannot save parcel anymore");
+    }
+
+    public Ticket receive(Parcel parcel, int lockerIndex) {
+        if (this.isAvailable()) {
+            Ticket ticket = new Ticket(lockerIndex);
             this.container.put(ticket.getId(),parcel);
             return ticket;
         }
@@ -33,5 +42,9 @@ public class Locker {
             return this.container.remove(ticket.getId());
         }
         throw new InvalidatedTicketException("Invalidated ticket");
+    }
+
+    public boolean isAvailable() {
+        return this.container.size() < capacity;
     }
 }

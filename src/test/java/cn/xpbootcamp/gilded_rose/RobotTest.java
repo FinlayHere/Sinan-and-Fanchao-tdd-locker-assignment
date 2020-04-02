@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.model.Locker;
+import cn.xpbootcamp.gilded_rose.model.LockerManageRobot;
 import cn.xpbootcamp.gilded_rose.model.Parcel;
 import cn.xpbootcamp.gilded_rose.model.Ticket;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,6 @@ public class RobotTest {
         Ticket ticket = lockerManageRobot.recieve(new Parcel());
         // Then
         assertNotNull(ticket);
-        assertThat(ticket.getLockerIndex).isEqualTo(1);
+        assertThat(ticket.getLockerIndex()).isEqualTo(1);
     }
 }
