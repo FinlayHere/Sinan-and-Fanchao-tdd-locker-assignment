@@ -48,4 +48,22 @@ public class RobotTest {
         assertThat(ticket.getLockerIndex()).isEqualTo(0);
     }
 
+    /**
+     * Save fail
+     * Given package, two lockers(all full, capacity run out) and  robot, when save package, then save fail throw exception.
+     */
+
+    @Test
+    public void should_throw_LockerFullException_when_save_parcel_given_parcel_robot_and_two_full_lockers() {
+        // Given
+        ArrayList<Locker> managedLockers = new ArrayList<>();
+        managedLockers.add(new Locker(1));
+        managedLockers.add(new Locker(1));
+        LockerManageRobot lockerManageRobot = new LockerManageRobot(managedLockers);
+        lockerManageRobot.recieve(new Parcel());
+        lockerManageRobot.recieve(new Parcel());
+        // When Then
+        assertThrows(LockerFullException.class, () -> lockerManageRobot.recieve(new Parcel()));
+
+    }
 }
