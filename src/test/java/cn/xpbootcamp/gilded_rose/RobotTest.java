@@ -64,6 +64,35 @@ public class RobotTest {
         lockerManageRobot.recieve(new Parcel());
         // When Then
         assertThrows(LockerFullException.class, () -> lockerManageRobot.recieve(new Parcel()));
-
     }
+
+    /**
+     * 取且成功
+     * Given ticket(valid), two lockers and robot, when take parcel, then return parcel
+     */
+    public void should_return_parcel_when_take_parcel_given_valid_ticket() {
+
+        // Given
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+
+        Parcel firstParcel = new Parcel();
+        Parcel secondParcel = new Parcel();
+
+        Ticket firstTicket = firstLocker.receive(firstParcel);
+        Ticket secondTicket = secondLocker.receive(secondParcel);
+
+        ArrayList<Locker> managedLockers = new ArrayList<>();
+
+        managedLockers.add(firstLocker);
+        managedLockers.add(secondLocker);
+
+        LockerManageRobot lockerManageRobot = new LockerManageRobot(managedLockers);
+
+        // When and Then
+        assertThat(lockerManageRobot.receive(firstTicket)).isEqualTo(firstParcel);
+        assertThat(lockerManageRobot.receive(secondTicket)).isEqualTo(secondParcel);
+    }
+
+
 }
