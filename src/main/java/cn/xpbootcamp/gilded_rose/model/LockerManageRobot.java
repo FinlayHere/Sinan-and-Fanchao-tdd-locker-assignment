@@ -1,5 +1,7 @@
 package cn.xpbootcamp.gilded_rose.model;
 
+import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
+
 import java.util.ArrayList;
 
 public class LockerManageRobot {
@@ -17,6 +19,6 @@ public class LockerManageRobot {
                 return locker.receive(parcel, lockerIndex);
             }
         }
-        return null;
+        throw new LockerFullException("Locker full cannot save parcel anymore");
     }
 }
