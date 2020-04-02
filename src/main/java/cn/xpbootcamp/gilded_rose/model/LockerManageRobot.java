@@ -22,7 +22,7 @@ public class LockerManageRobot {
         throw new LockerFullException("Locker full cannot save parcel anymore");
     }
 
-    public Parcel receive(Ticket ticket) {
-
+    public Object receive(Ticket ticket) {
+        return managedLockers.get(ticket.getLockerIndex()).takeParcel(ticket);
     }
 }

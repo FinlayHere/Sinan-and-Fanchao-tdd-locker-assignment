@@ -41,4 +41,8 @@ public class Locker {
     public boolean isAvailable() {
         return this.container.size() < capacity;
     }
+
+    public Map<String, Parcel> getContainer() {
+        return container;
+    }
 }
