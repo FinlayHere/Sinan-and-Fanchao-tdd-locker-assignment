@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Locker {
     private int capacity;
-    private Map<String,Parcel> container = new HashMap<>();
+    private Map<String, Parcel> container = new HashMap<>();
 
     public Locker() {
         this.capacity = Integer.MAX_VALUE;
@@ -19,19 +19,19 @@ public class Locker {
 
     public Ticket receive(Parcel parcel) {
         Ticket ticket = new Ticket();
-        this.container.put(ticket.getId(),parcel);
+        this.container.put(ticket.getId(), parcel);
         return ticket;
     }
 
     public Ticket receive(Parcel parcel, int lockerIndex) {
         Ticket ticket = new Ticket(lockerIndex);
-        this.container.put(ticket.getId(),parcel);
+        this.container.put(ticket.getId(), parcel);
         return ticket;
     }
 
 
     public Parcel takeParcel(Ticket ticket) {
-        if (container.containsKey(ticket.getId())){
+        if (container.containsKey(ticket.getId())) {
             return this.container.remove(ticket.getId());
         }
         throw new InvalidatedTicketException("Invalidated ticket");
@@ -44,4 +44,9 @@ public class Locker {
     public Map<String, Parcel> getContainer() {
         return container;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
+
