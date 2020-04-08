@@ -15,6 +15,15 @@ public class LockerManageRobot {
     }
 
     public Ticket receive(Parcel parcel) {
+
+        Locker targetLocker = findTargetLocker();
+
+        return targetLocker.receive(parcel, managedLockers.indexOf(targetLocker));
+
+    }
+
+    private Locker findTargetLocker(){
+
         List<Locker> mostAvailableCapacityLocker = new ArrayList<>();
         int availableCapacity = 0;
         for (Locker locker: managedLockers){
@@ -33,8 +42,7 @@ public class LockerManageRobot {
             throw new LockerFullException("Locker full cannot save parcel anymore");
         }
 
-        Locker targetLocker = mostAvailableCapacityLocker.get(0);
-        return targetLocker.receive(parcel, managedLockers.indexOf(targetLocker));
+        return mostAvailableCapacityLocker.get(0);
 
     }
 

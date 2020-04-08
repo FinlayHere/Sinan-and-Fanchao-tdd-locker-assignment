@@ -2,8 +2,8 @@
 
 - Given 
     two lockers,
-    first locker(5 capacity, used 3 of all),
-    second locker(5 capacity, used 2 of all),
+    first locker(available capacity 2),
+    second locker(available capacity 3),
     a smart robot,
     a parcel
 - When 
@@ -11,11 +11,15 @@
 - Then
     parcel should be store in the second locker
     
-- Given
-    first locker
-    second locker
-    two lockers have same used capacity
-- When
+------
+
+- Given 
+    two lockers,
+    first locker(available capacity 2),
+    second locker(available capacity 2),
+    a smart robot,
+    a parcel
+- When 
     store parcel
 - Then 
     parcel should store in first locker

@@ -30,7 +30,7 @@ public class SmartRobotTest {
      * parcel should be store in the second locker
      */
     @Test
-    public void should_store_parcel_in_second_locker_when_store_parcel_given_two_lockers_different_available_capacity() {
+    public void should_store_parcel_in_larger_capacity_locker_when_store_parcel_given_two_lockers_different_available_capacity() {
         // Given
         Locker firstLocker = new Locker(2);
         Locker secondLocker = new Locker(3);

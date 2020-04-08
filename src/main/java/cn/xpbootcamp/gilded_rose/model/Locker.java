@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose.model;
 
 import cn.xpbootcamp.gilded_rose.exception.InvalidatedTicketException;
+import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,13 @@ public class Locker {
     }
 
     public Ticket receive(Parcel parcel) {
+
         Ticket ticket = new Ticket();
+
+        if (!isAvailable()){
+            throw new LockerFullException("Locker full cannot save parcel anymore");
+        }
+
         this.container.put(ticket.getId(), parcel);
         return ticket;
     }
