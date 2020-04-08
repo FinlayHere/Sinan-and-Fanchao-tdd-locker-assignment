@@ -15,9 +15,6 @@ public class LockerManageRobot {
     }
 
     public Ticket receive(Parcel parcel) {
-        // TODO: 把包裹存到可用容量最多的Locker 在可用容量相同的情况下 把包裹存在靠前的locker
-
-        // 寻找可用容量最多的Locker
         List<Locker> mostAvailableCapacityLocker = new ArrayList<>();
         int availableCapacity = 0;
         for (Locker locker: managedLockers){
