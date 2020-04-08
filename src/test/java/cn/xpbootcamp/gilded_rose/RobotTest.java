@@ -93,7 +93,7 @@ public class RobotTest {
      * Given ticket(invalided), two lockers and robot, when take parcel, then take fail throw exception
      */
     @Test
-    public void should_throw_InvaildTicketException_when_take_parcel_given_invalid_ticket() {
+    public void should_throw_InvalidTicketException_when_take_parcel_given_invalid_ticket() {
         // Given
         ArrayList<Locker> managedLockers = new ArrayList<>();
         managedLockers.add(new Locker(1));

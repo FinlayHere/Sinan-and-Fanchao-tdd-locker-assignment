@@ -12,7 +12,7 @@ public class LockerManageRobot {
         this.managedLockers = managedLockers;
     }
 
-    public Ticket recieve(Parcel parcel) {
+    public Ticket receive(Parcel parcel) {
         for(int lockerIndex = 0; lockerIndex < managedLockers.size(); lockerIndex++) {
             Locker locker = managedLockers.get(lockerIndex);
             if (locker.isAvailable()){
@@ -22,7 +22,7 @@ public class LockerManageRobot {
         throw new LockerFullException("Locker full cannot save parcel anymore");
     }
 
-    public Object receive(Ticket ticket) {
+    public Parcel receive(Ticket ticket) {
         return managedLockers.get(ticket.getLockerIndex()).takeParcel(ticket);
     }
 }
