@@ -3,12 +3,13 @@ package cn.xpbootcamp.gilded_rose.model;
 import cn.xpbootcamp.gilded_rose.exception.LockerFullException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LockerManageRobot {
 
-    private ArrayList<Locker> managedLockers;
+    private List<Locker> managedLockers;
 
-    public LockerManageRobot(ArrayList<Locker> managedLockers) {
+    public LockerManageRobot(List<Locker> managedLockers) {
         this.managedLockers = managedLockers;
     }
 
