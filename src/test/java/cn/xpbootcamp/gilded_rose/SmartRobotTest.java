@@ -1,22 +1,16 @@
 package cn.xpbootcamp.gilded_rose;
 
-import cn.xpbootcamp.gilded_rose.model.Locker;
-import cn.xpbootcamp.gilded_rose.model.LockerManageRobot;
-import cn.xpbootcamp.gilded_rose.model.Parcel;
-import cn.xpbootcamp.gilded_rose.model.Ticket;
+import cn.xpbootcamp.gilded_rose.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmartRobotTest {
 
-    public Boolean isIn(Parcel parcel, Locker locker){
-        return locker.getContainer().containsValue(parcel);
-    }
     /**
      * - Given
      * two lockers,
@@ -32,16 +26,15 @@ public class SmartRobotTest {
     @Test
     public void should_store_parcel_in_larger_capacity_locker_when_store_parcel_given_two_lockers_different_available_capacity() {
         // Given
-        Locker firstLocker = new Locker(2);
-        Locker secondLocker = new Locker(3);
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(2);
         List<Locker> managedLockers = Arrays.asList(firstLocker,secondLocker);
-        LockerManageRobot smartRobot = new LockerManageRobot(managedLockers);
+        LockerManageRobot smartRobot = new SmartRobot(managedLockers);
         Parcel parcel = new Parcel();
         // When
         Ticket ticket = smartRobot.receive(parcel);
         // Then
-        assertThat(ticket.getLockerIndex()).isEqualTo(1);
-        assertTrue(isIn(parcel, secondLocker));
+        assertThat(secondLocker.takeParcel(ticket)).isEqualTo(parcel);
     }
 
     /**
@@ -60,12 +53,11 @@ public class SmartRobotTest {
         Locker firstLocker = new Locker(1);
         Locker secondLocker = new Locker(1);
         List<Locker> managedLockers = Arrays.asList(firstLocker,secondLocker);
-        LockerManageRobot smartRobot = new LockerManageRobot(managedLockers);
+        LockerManageRobot smartRobot = new SmartRobot(managedLockers);
         Parcel parcel = new Parcel();
         // When
         Ticket ticket = smartRobot.receive(parcel);
         // Then
-        assertThat(ticket.getLockerIndex()).isEqualTo(0);
-        assertTrue(isIn(parcel, firstLocker));
+        assertThat(firstLocker.takeParcel(ticket)).isEqualTo(parcel);
     }
 }
