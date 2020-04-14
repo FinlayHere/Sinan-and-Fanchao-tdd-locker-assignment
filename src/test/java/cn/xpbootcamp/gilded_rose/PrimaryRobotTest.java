@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PrimaryRobotTest {
+
     /**
      * Save successfully
      * - Given parcel, two lockers(the first one is full and second one available) and robot, when save parcel, then parcel should in the second one and return ticket.
@@ -68,6 +69,7 @@ public class PrimaryRobotTest {
      * take parcel successfully
      * Given ticket(valid), locker and robot, when take parcel, then return parcel
      */
+
     @Test
     public void should_return_parcel_when_take_parcel_given_valid_ticket() {
         // Given
@@ -89,6 +91,7 @@ public class PrimaryRobotTest {
      * take parcel fail
      * Given ticket(invalided), two lockers and robot, when take parcel, then take fail throw exception
      */
+
     @Test
     public void should_throw_InvaildTicketException_when_take_parcel_given_invalid_ticket() {
         // Given
